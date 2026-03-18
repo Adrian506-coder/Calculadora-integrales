@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Calculadora de Integrales</title>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<h1>Calculadora de Integrales</h1>
+
+<div class="contenedor">
+
+<!-- PANEL IZQUIERDO -->
+<div class="panel">
+
+<label>Función:</label>
+
+<input type="text" id="funcion" placeholder="Ej: x^2" oninput="filtrarFuncion(); actualizarLimites()">
+
+<div class="panelSimbolos">
+
+<button onclick="insertar('pi')">π</button>
+<button onclick="insertar('sqrt()')">√</button>
+<button onclick="insertar('^')">^</button>
+<button onclick="insertar('sin()')">sin</button>
+<button onclick="insertar('cos()')">cos</button>
+<button onclick="insertar('tan()')">tan</button>
+<button onclick="insertar('log()')">log</button>
+<button onclick="insertar('exp()')">exp</button>
+<button onclick="insertar('(')">(</button>
+<button onclick="insertar(')')">)</button>
+
+</div>
+
+<br><br>
+
+<label>
+<input type="checkbox" id="usarLimites" onchange="toggleLimites()">
+Usar límites
+</label>
+
+<div id="camposLimites" style="display:none; margin-top:10px;">
+
+<h3>Límites de integración</h3>
+
+<div id="limitesX">
+
+<label>x inferior:</label>
+<input type="text" id="ax" oninput="filtrarNumero(this)">
+<br>
+
+<label>x superior:</label>
+<input type="text" id="bx" oninput="filtrarNumero(this)">
+
+</div>
+
+<div id="limitesY" style="display:none">
+
+<label>y inferior:</label>
+<input type="text" id="ay" oninput="filtrarNumero(this)">
+<br>
+
+<label>y superior:</label>
+<input type="text" id="by" oninput="filtrarNumero(this)">
+
+</div>
+
+<div id="limitesZ" style="display:none">
+
+<label>z inferior:</label>
+<input type="text" id="az" oninput="filtrarNumero(this)"> 
+<br>
+
+<label>z superior:</label>
+<input type="text" id="bz" oninput="filtrarNumero(this)">
+
+</div>
+
+</div>
+
+<br><br>
+
+<div class="botonesCalculo">
+
+<button  onclick="calcular()">Calcular Integral</button>
+
+<button onclick="resetear()">Reset</button>
+
+</div>
+
+<br><br>
+
+<div id="controlRectangulos" style="display:none">
+
+<label>Número de rectángulos:</label>
+
+<input 
+type="range"
+id="rectangulos"
+min="5"
+max="200"
+value="20"
+oninput="actualizarRectangulos()"
+>
+
+<span id="valorRect">20</span>
+
+</div>
+
+<div id="ejemplosVolumen" style="display:none">
+
+<h3>Ejemplos volumétricos</h3>
+
+<button onclick="ejemploCubo()">Volumen de cubo</button>
+
+<button onclick="ejemploEsfera()">Volumen de esfera</button>
+
+</div>
+
+</div>
+
+
+<!-- PANEL RESULTADO -->
+<div class="panelResultado">
+
+<h2>Resultado</h2>
+
+<div id="resultado"></div>
+
+</div>
+
+</div>
+
+<br><br>
+
+<div id="grafica"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

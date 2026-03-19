@@ -6,10 +6,6 @@ function calcular(){
 
 let funcion = document.getElementById("funcion").value
 
-// if(!validarFuncion(funcion)){
-// return
-// }
-
 if(!validarFuncion(funcion)){
 alert("Función inválida")
 return
@@ -34,7 +30,6 @@ document.getElementById("resultado").innerHTML =
 
 return
 }
-
 
 // -----------------------------
 // INTEGRAL SIMPLE
@@ -105,7 +100,6 @@ graficarSuperficie(funcion,ax,bx)
 return
 }
 
-
 // -----------------------------
 // INTEGRAL TRIPLE
 // -----------------------------
@@ -149,26 +143,23 @@ input.value = valor.replace(permitido,"")
 
 }
 
-
 function validarFuncion(funcion){
 
 funcion = funcion.toLowerCase().trim()
 
 if(funcion === ""){
-alert("Ingrese una función")
 return false
 }
 
-// try{
+try{
 
-// math.parse(funcion)
+math.parse(funcion)
 
-// }catch{
+}catch{
 
-// alert("La función tiene un error de sintaxis")
-// return false
+return false
 
-// }
+}
 
 return true
 
@@ -235,7 +226,6 @@ function graficar(expr,a,b){
 let x=[]
 let y=[]
 
-// curva de la funcion
 for(let i=a;i<=b;i+=0.05){
 
 x.push(i)
@@ -248,7 +238,6 @@ y.push(null)
 
 }
 
-// curva
 let curva={
 x:x,
 y:y,
@@ -258,8 +247,6 @@ name:"f(x)",
 line:{color:"blue"}
 }
 
-
-// area bajo la curva
 let area={
 x:x,
 y:y,
@@ -269,9 +256,6 @@ mode:"none",
 name:"Área de la integral",
 fillcolor:"rgba(0,150,255,0.3)"
 }
-
-
-// RECTANGULOS DE RIEMANN
 
 let rectangulos=[]
 
@@ -299,7 +283,6 @@ name:"Rectángulo"
 
 }
 
-
 let data=[area,curva,...rectangulos]
 
 let layout={
@@ -314,7 +297,6 @@ yaxis:{title:"f(x)"}
 Plotly.newPlot("grafica",data,layout)
 
 }
-
 
 // -----------------------------
 // GRAFICAR SIN LIMITES
@@ -361,8 +343,6 @@ yaxis:{title:"f(x)"}
 Plotly.newPlot("grafica",data,layout)
 
 }
-
-
 
 // -----------------------------
 // GRAFICAR SUPERFICIE 3D
@@ -528,8 +508,6 @@ return suma
 
 }
 
-
-
 // -----------------------------
 // MOSTRAR / OCULTAR LIMITES
 // -----------------------------
@@ -559,7 +537,6 @@ mostrarEjemplosVolumen(tipo)
 
 }
 
-
 // -----------------------------
 // MOSTRAR LIMITES SEGUN VARIABLES
 // -----------------------------
@@ -567,6 +544,14 @@ mostrarEjemplosVolumen(tipo)
 function actualizarLimites(){
 
 let funcion = document.getElementById("funcion").value
+let input = document.getElementById("funcion")
+
+if(!validarFuncion(funcion)){
+input.classList.add("inputError")
+return
+}else{
+input.classList.remove("inputError")
+}
 
 if(!validarFuncion(funcion)) return
 
@@ -605,7 +590,6 @@ document.getElementById("resultado").innerHTML +=
 MathJax.typesetPromise()
 
 }
-
 
 function mostrarIntegralSimple(funcion,a,b,resultado,n){
 
@@ -800,8 +784,6 @@ calcular()
 
 }
 
-
-
 // -----------------------------
 // EJEMPLO VOLUMEN DE ESFERA
 // -----------------------------
@@ -863,14 +845,11 @@ div.style.display = "none"
 
 function resetear(){
 
-// limpiar funcion
 document.getElementById("funcion").value = ""
 
-// desactivar limites
 document.getElementById("usarLimites").checked = false
 document.getElementById("camposLimites").style.display = "none"
 
-// limpiar limites
 document.getElementById("ax").value = ""
 document.getElementById("bx").value = ""
 document.getElementById("ay").value = ""
@@ -878,18 +857,14 @@ document.getElementById("by").value = ""
 document.getElementById("az").value = ""
 document.getElementById("bz").value = ""
 
-// ocultar limites extras
 document.getElementById("limitesY").style.display = "none"
 document.getElementById("limitesZ").style.display = "none"
 
-// ocultar controles
 document.getElementById("controlRectangulos").style.display = "none"
 document.getElementById("ejemplosVolumen").style.display = "none"
 
-// limpiar resultado
 document.getElementById("resultado").innerHTML = ""
 
-// limpiar grafica
 Plotly.purge("grafica")
 
 }

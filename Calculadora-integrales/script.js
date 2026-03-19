@@ -159,16 +159,16 @@ alert("Ingrese una función")
 return false
 }
 
-try{
+// try{
 
-math.parse(funcion)
+// math.parse(funcion)
 
-}catch{
+// }catch{
 
-alert("La función tiene un error de sintaxis")
-return false
+// alert("La función tiene un error de sintaxis")
+// return false
 
-}
+// }
 
 return true
 
